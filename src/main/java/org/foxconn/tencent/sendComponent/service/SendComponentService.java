@@ -1,6 +1,5 @@
 package org.foxconn.tencent.sendComponent.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -12,11 +11,12 @@ import org.foxconn.tencent.sendComponent.entity.Component;
 import org.foxconn.tencent.sendComponent.entity.OsTestResultJsonModel;
 import org.foxconn.tencent.sendComponent.entity.SendComponent;
 import org.foxconn.tencent.sendComponent.entity.SendMsg;
-import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 @Service
 public class SendComponentService {
@@ -35,9 +35,12 @@ public class SendComponentService {
 		msg.setData(data);
 		String json = JSON.toJSONString(msg);
 		System.out.println(json);
-		RestTemplate rest = new RestTemplate();
-//		HttpEntity<>
-//		rest.postForEntity(url, request, responseType)
+		JSONObject postjson = JSON.parseObject(json);
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> responseEntity =
+				restTemplate.postForEntity("http://localhost:2489/efoxsfcSSNSTATUS", postjson, String.class);
+        String body = responseEntity.getBody();
+        System.out.println(body);
 	}
 	
 	public void parseTestResult(){
