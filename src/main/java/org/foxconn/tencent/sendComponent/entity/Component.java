@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Component{
 	//解析根节点
-	Component system;
+	private Component system;
 	
 	//写入数据库时记录ID
 	private String id;
@@ -28,7 +28,7 @@ public class Component{
 	private Component hba;
 	private List<Component> bp= new ArrayList<Component>();
 	
-	List<Component> component= new ArrayList<Component>();
+	private List<Component> component= new ArrayList<Component>();
 
 	public Component getSystem() {
 		return system;

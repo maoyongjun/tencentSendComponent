@@ -1,0 +1,545 @@
+{
+	"Action": "SupplierWriteServerPartInfo",
+	"Data": {
+		"partInfo": [
+			{
+				"FW": "BMC:1.22;BIOS:HC1T115F;CPLD:06",
+				"Id": "1",
+				"OriPartSN": "02012EW00T0BAU01T",
+				"PartType": "主板",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "2",
+				"OriPartSN": "54060500FFFBEBBF",
+				"PartType": "CPU",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "3",
+				"OriPartSN": "54060500FFFBEBBF",
+				"PartType": "CPU",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "SCV10142",
+				"Id": "4",
+				"OriPartSN": "BTYS81120A9D480BGN",
+				"PartType": "硬盘",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "5",
+				"OriPartSN": "18F6FEAF",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "6",
+				"OriPartSN": "18F6E9F7",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "7",
+				"OriPartSN": "18F6E84F",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "8",
+				"OriPartSN": "18F6ECCC",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "9",
+				"OriPartSN": "18F6E8F3",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "10",
+				"OriPartSN": "18F6FDE7",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "11",
+				"OriPartSN": "18F6FE25",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "12",
+				"OriPartSN": "18F6E92B",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "13",
+				"OriPartSN": "18F6FD19",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "14",
+				"OriPartSN": "18F6E9E4",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "15",
+				"OriPartSN": "18F6FCF7",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"Id": "16",
+				"OriPartSN": "18F6FDFA",
+				"PartType": "内存",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "3.33",
+				"Id": "17",
+				"OriPartSN": "70:20:84:e1:55:a7",
+				"PartType": "网卡",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "3.33",
+				"Id": "18",
+				"OriPartSN": "70:20:84:e1:55:a6",
+				"PartType": "网卡",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "14.21.2010",
+				"Id": "19",
+				"OriPartSN": "MT1814X06829",
+				"PartType": "网卡",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "14.21.2010",
+				"Id": "20",
+				"OriPartSN": "MT1814X06829",
+				"PartType": "网卡",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "00.01.01",
+				"Id": "21",
+				"OriPartSN": "F3182200000344",
+				"PartType": "电源",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "00.01.01",
+				"Id": "22",
+				"OriPartSN": "F3182200000270",
+				"PartType": "电源",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "0707",
+				"Id": "23",
+				"OriPartSN": "",
+				"PartType": "背板",
+				"ScanPartPN": "",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "24",
+				"OriPartSN": "78A41H8700192",
+				"PartType": "CPU",
+				"ScanPartPN": "110110B00-187-G",
+				"ScanPartSN": "78A41H8700192",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "25",
+				"OriPartSN": "78A41H8700335",
+				"PartType": "CPU",
+				"ScanPartPN": "110110B00-187-G",
+				"ScanPartSN": "78A41H8700335",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "26",
+				"OriPartSN": "BTYS81120A9D480BGN",
+				"PartType": "硬盘",
+				"ScanPartPN": "81080JK00-187-G",
+				"ScanPartSN": "BTYS81120A9D480BGN",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "27",
+				"OriPartSN": "S802C0F173918F6E9E4",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6E9E4",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "28",
+				"OriPartSN": "S802C0F173918F6FEAF",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6FEAF",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "29",
+				"OriPartSN": "S802C0F173918F6E9F7",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6E9F7",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "30",
+				"OriPartSN": "S802C0F173918F6E84F",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6E84F",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "31",
+				"OriPartSN": "S802C0F173918F6FCF7",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6FCF7",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "32",
+				"OriPartSN": "S802C0F173918F6FDFA",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6FDFA",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "33",
+				"OriPartSN": "S802C0F173918F6FD19",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6FD19",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "34",
+				"OriPartSN": "S802C0F173918F6E92B",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6E92B",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "35",
+				"OriPartSN": "S802C0F173918F6FE25",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6FE25",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "36",
+				"OriPartSN": "S802C0F173918F6ECCC",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6ECCC",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "37",
+				"OriPartSN": "S802C0F173918F6E8F3",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6E8F3",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "38",
+				"OriPartSN": "S802C0F173918F6FDE7",
+				"PartType": "内存",
+				"ScanPartPN": "800309D00-216-G",
+				"ScanPartSN": "S802C0F173918F6FDE7",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "39",
+				"OriPartSN": "F3182200000344",
+				"PartType": "电源",
+				"ScanPartPN": "860207T00-77H-G",
+				"ScanPartSN": "F3182200000344",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "40",
+				"OriPartSN": "F3182200000270",
+				"PartType": "电源",
+				"ScanPartPN": "860207T00-77H-G",
+				"ScanPartSN": "F3182200000270",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "41",
+				"OriPartSN": "MT1814X06829",
+				"PartType": "OCP Card",
+				"ScanPartPN": "070202G00-16K-G",
+				"ScanPartSN": "MT1814X06829",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "42",
+				"OriPartSN": "02012EW00T0BAU01T",
+				"PartType": "主板",
+				"ScanPartPN": "02012EW00-600-G0B",
+				"ScanPartSN": "02012EW00T0BAU01T",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "43",
+				"OriPartSN": "SG85A7LG",
+				"PartType": "风扇",
+				"ScanPartPN": "490209800-H17-G",
+				"ScanPartSN": "SG85A7LG",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "44",
+				"OriPartSN": "SG85A7LH",
+				"PartType": "风扇",
+				"ScanPartPN": "490209800-H17-G",
+				"ScanPartSN": "SG85A7LH",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "45",
+				"OriPartSN": "SG85A7KG",
+				"PartType": "风扇",
+				"ScanPartPN": "490209800-H17-G",
+				"ScanPartSN": "SG85A7KG",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "46",
+				"OriPartSN": "SG85A7KK",
+				"PartType": "风扇",
+				"ScanPartPN": "490209800-H17-G",
+				"ScanPartSN": "SG85A7KK",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "47",
+				"OriPartSN": "SG85A7AA",
+				"PartType": "风扇",
+				"ScanPartPN": "490209800-H17-G",
+				"ScanPartSN": "SG85A7AA",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "48",
+				"OriPartSN": "SG85A7KS",
+				"PartType": "风扇",
+				"ScanPartPN": "490209800-H17-G",
+				"ScanPartSN": "SG85A7KS",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "49",
+				"OriPartSN": "100412R00T0BAU0SF",
+				"PartType": "背板",
+				"ScanPartPN": "100412R00-600-G0A",
+				"ScanPartSN": "100412R00T0BAU0SF",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "50",
+				"OriPartSN": "10040WH00T0BAU0TS",
+				"PartType": "Riser卡",
+				"ScanPartPN": "10040WH00-600-G0A",
+				"ScanPartSN": "10040WH00T0BAU0TS",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "51",
+				"OriPartSN": "",
+				"PartType": "Cable",
+				"ScanPartPN": "350740H00-245-G",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "52",
+				"OriPartSN": "",
+				"PartType": "Cable",
+				"ScanPartPN": "35104FF00-245-G",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "53",
+				"OriPartSN": "",
+				"PartType": "Cable",
+				"ScanPartPN": "35104QY00-245-G",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "54",
+				"OriPartSN": "",
+				"PartType": "Cable",
+				"ScanPartPN": "35104R000-245-G",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			},
+			{
+				"FW": "",
+				"Id": "55",
+				"OriPartSN": "",
+				"PartType": "Cable",
+				"ScanPartPN": "35121G700-245-G",
+				"ScanPartSN": "",
+				"SvrAssetId": "",
+				"SvrSN": "7CE829P6HG"
+			}
+		]
+	},
+	"Method": "run",
+	"StartCompany": "Foxconn"
+}

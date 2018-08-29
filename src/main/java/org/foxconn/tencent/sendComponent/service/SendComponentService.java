@@ -1,5 +1,6 @@
 package org.foxconn.tencent.sendComponent.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -9,15 +10,35 @@ import javax.annotation.Resource;
 import org.foxconn.tencent.sendComponent.dao.OsMsgDao;
 import org.foxconn.tencent.sendComponent.entity.Component;
 import org.foxconn.tencent.sendComponent.entity.OsTestResultJsonModel;
+import org.foxconn.tencent.sendComponent.entity.SendComponent;
+import org.foxconn.tencent.sendComponent.entity.SendMsg;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
 
 @Service
 public class SendComponentService {
-	
+	private String url ="https://tssp.tencent.com/open_api/logic_test";
 	@Resource
 	OsMsgDao osMsgDao;
+	
+	public void sendMsg(){
+		SendMsg msg = new SendMsg();
+		msg.setAction("SupplierWriteServerPartInfo");
+		msg.setMethod("run");
+		msg.setStartCompany("Foxconn");
+		SendMsg.Data data =  msg.new Data();
+		List<SendComponent> sendComponents =osMsgDao.getSendComponent();
+		data.setPartInfo(sendComponents);
+		msg.setData(data);
+		String json = JSON.toJSONString(msg);
+		System.out.println(json);
+		RestTemplate rest = new RestTemplate();
+//		HttpEntity<>
+//		rest.postForEntity(url, request, responseType)
+	}
 	
 	public void parseTestResult(){
 		

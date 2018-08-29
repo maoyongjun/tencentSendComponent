@@ -26,5 +26,14 @@
  		INSERT INTO efoxSFCTencentComponent(ID,SN,PN,FW,CTYPE,PARENTID,lasteditdt) values (#{id},#{sn},#{pn},#{fw},#{type},#{parentId},#{lasteditdt})
  	</insert>
  	
+ 	<select id="getSendComponent"  statementType="CALLABLE" resultType="org.foxconn.tencent.sendComponent.entity.SendComponent">
+ 		<![CDATA[
+		    {call efoxsfcgetTencentSendComponent
+		     ()
+		     }
+		]]>
+ 	</select>
+ 	
+ 	
  </mapper>        
  

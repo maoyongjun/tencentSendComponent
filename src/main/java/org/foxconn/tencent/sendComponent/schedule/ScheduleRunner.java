@@ -53,7 +53,7 @@ public class ScheduleRunner {
 			public void run() {
 				logger.info("send excel task Begin");
 				try {
-					sendComponentService.parseTestResult();
+					sendComponentService.sendMsg();
 				} catch (Exception e) {
 					logger.error(e.toString());
 				}
