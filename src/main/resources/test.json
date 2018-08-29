@@ -1,0 +1,182 @@
+{
+	"system": {
+		"pn": "RM760-FX",
+		"sn": "7CE821P5CT",
+		"board": {
+			"pn": "T-Twins",
+			"sn": "02012EW00T0BAU012",
+			"fw": "BMC:1.22;BIOS:HC1T115F;CPLD:06"
+		},
+		"cpu": [
+			{
+				"pn": "Intel(R)Xeon(R)Gold6148CPU@2.40GHz",
+				"sn": "54060500FFFBEBBF"
+			},
+			{
+				"pn": "Intel(R)Xeon(R)Gold6148CPU@2.40GHz",
+				"sn": "54060500FFFBEBBF"
+			}
+		],
+		"hdd": [
+			{
+				"pn": "INTELSSDSC2KB480G7",
+				"sn": "BTYS808102Q4480BGN",
+				"fw": "SCV10142"
+			}
+		],
+		"memory": [
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1E4F"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1F97"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1CED"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1F32"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1D6A"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1F98"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1FBC"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1F95"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1FF6"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1E49"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1AF6"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1AFE"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1E05"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1E50"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1B70"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1ED7"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1F33"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1F99"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1E07"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1E04"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1E9D"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1CEB"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1EDB"
+			},
+			{
+				"pn": "M393A4K40BB2-CTD",
+				"sn": "38BD1FBA"
+			}
+		],
+		"nic": [
+			{
+				"pn": "IntelCorporationDevice37d2(rev09)",
+				"sn": "70:20:84:e1:55:4f",
+				"fw": "3.33"
+			},
+			{
+				"pn": "IntelCorporationDevice37d2(rev09)",
+				"sn": "70:20:84:e1:55:4e",
+				"fw": "3.33"
+			},
+			{
+				"pn": "MellanoxTechnologiesMT27710Family[ConnectX-4Lx]",
+				"sn": "MT1814X07134",
+				"fw": "14.21.2010"
+			},
+			{
+				"pn": "MellanoxTechnologiesMT27710Family[ConnectX-4Lx]",
+				"sn": "MT1814X07134",
+				"fw": "14.21.2010"
+			}
+		],
+		"psu": [
+			{
+				"pn": "S15-550P1A",
+				"sn": "F3181900000398",
+				"fw": "00.01.01"
+			},
+			{
+				"pn": "S15-550P1A",
+				"sn": "F3181900000168",
+				"fw": "00.01.01"
+			}
+		],
+		"raid": {
+			"pn": "",
+			"sn": "",
+			"fw": ""
+		},
+		"hba": {
+			"pn": "",
+			"sn": "",
+			"fw": ""
+		},
+		"bp": [
+			{
+				"pn": "",
+				"sn": "",
+				"fw": "0707"
+			},
+			{
+				"pn": "",
+				"sn": "",
+				"fw": ""
+			}
+		]
+	}
+}
