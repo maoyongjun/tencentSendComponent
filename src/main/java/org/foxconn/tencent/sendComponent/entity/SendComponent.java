@@ -11,7 +11,7 @@ public class SendComponent {
 	private String	svrSN	;
 	@JSONField(name="PartType")
 	private String	partType	;
-	@JSONField(name="OriPartSN")
+	@JSONField(name="OriPartPN")
 	private String	oriPartPN	;
 	@JSONField(name="OriPartSN")
 	private String	oriPartSN	;

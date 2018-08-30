@@ -1,10 +1,7 @@
 package org.foxconn.tencent.sendComponent.schedule; 
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -12,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.foxconn.tencent.sendComponent.entity.Pallents;
 import org.foxconn.tencent.sendComponent.service.SendComponentService;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +51,9 @@ public class ScheduleRunner {
 			public void run() {
 				logger.info("send excel task Begin");
 				try {
-					sendComponentService.sendMsg();
+					sendComponentService.updateMMprodmaster();
+					sendComponentService.sendMsg(new Pallents());
+					
 				} catch (Exception e) {
 					logger.error(e.toString());
 				}

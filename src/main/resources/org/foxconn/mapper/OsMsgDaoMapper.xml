@@ -29,11 +29,23 @@
  	<select id="getSendComponent"  statementType="CALLABLE" resultType="org.foxconn.tencent.sendComponent.entity.SendComponent">
  		<![CDATA[
 		    {call efoxsfcgetTencentSendComponent
-		     ()
+		     (#{pallents})
 		     }
 		]]>
  	</select>
  	
+ 	<update id="updateMMprocomponent" parameterType="org.foxconn.tencent.sendComponent.entity.MMprodmaster">
+ 		update mmprodmaster set manufacturerpn = #{manufacturerpn} where partno =#{partno}
+ 		
+ 	</update>
+ 	
+ 	<select id="findSkunos" resultType="org.foxconn.tencent.sendComponent.entity.MMprodmaster">
+ 		select	DISTINCT B.partno
+		from	mfworkorder A,mfworkdetail B  
+		WHERE	routeid  LIKE 'LXTe%' 
+				AND A.workorderno = B.workorderno
+				AND B.categoryname  IN ('MG67','MG95')
+ 	</select>
  	
  </mapper>        
  
