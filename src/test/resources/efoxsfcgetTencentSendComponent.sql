@@ -76,7 +76,8 @@ FROM	DBO.fn_getTencentSendComponentAssyDetail(@SN) A1
 --写入要发送的元器件
 insert into @sendComponent(SvrAssetId,SvrSN,PartType,OriPartPN,OriPartSN,FW,ScanPartPN,ScanPartSN,NUM)
 SELECT A1.ASSETCODE,parentsn,o_ctype,o_pn,o_sn,fw,'','' ,NUM
-FROM @sendOsComponent A1 
+FROM @sendOsComponent A1  
+WHERE A1.o_ctype<>N'网卡'
 
 UPDATE @sendComponent SET OriPartSN=A2.sn,A1.ScanPartSN = A2.sn
 FROM   @sendComponent A1,@sendEfoxComponent A2
@@ -115,6 +116,6 @@ WHERE	ctype IN (N'Riser卡')
 --SELECT * FROM @sendEfoxComponent
 
 
-SELECT ROW_NUMBER() over(PARTITION BY ID order by SvrSN,PartType),SvrAssetId,SvrSN,PartType,OriPartPN,OriPartSN,FW,ScanPartPN,ScanPartSN 
+SELECT ROW_NUMBER() over(PARTITION BY '' order by SvrSN,PartType) as id,SvrAssetId,SvrSN,PartType,OriPartPN,OriPartSN,FW,ScanPartPN,ScanPartSN 
 FROM @sendComponent
 ORDER BY SvrSN,PartType

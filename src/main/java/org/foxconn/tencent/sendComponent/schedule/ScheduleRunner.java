@@ -51,8 +51,10 @@ public class ScheduleRunner {
 			public void run() {
 				logger.info("send excel task Begin");
 				try {
+					sendComponentService.sendMsgToB2B();
 					sendComponentService.updateMMprodmaster();
 					sendComponentService.sendMsg(new Pallents());
+					
 					
 				} catch (Exception e) {
 					logger.error(e.toString());

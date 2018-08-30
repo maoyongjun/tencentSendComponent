@@ -1,13 +1,17 @@
 package org.foxconn.tencent.sendComponent.service;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.foxconn.tencent.sendComponent.dao.OsMsgDao;
+import org.foxconn.tencent.sendComponent.entity.B2BMsgHeader;
 import org.foxconn.tencent.sendComponent.entity.Component;
 import org.foxconn.tencent.sendComponent.entity.MMprodmaster;
 import org.foxconn.tencent.sendComponent.entity.OsTestResultJsonModel;
@@ -15,12 +19,15 @@ import org.foxconn.tencent.sendComponent.entity.Pallents;
 import org.foxconn.tencent.sendComponent.entity.SendComponent;
 import org.foxconn.tencent.sendComponent.entity.SendMsg;
 import org.foxconn.tencent.sendComponent.sap.MMprodmasterSAPClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sap.conn.jco.JCoException;
 
 @RestController
@@ -29,6 +36,8 @@ public class SendComponentService {
 	private String url ="https://tssp.tencent.com/open_api/logic_test";
 	@Resource
 	OsMsgDao osMsgDao;
+	
+	
 	Logger logger = Logger.getLogger(SendComponentService.class);
 	@PostMapping(path="/os/getData",consumes="application/json",produces="application/json")
 	public String sendMsg(@RequestBody Pallents pallent){
@@ -111,6 +120,36 @@ public class SendComponentService {
 			
 			osMsgDao.updateMMprocomponent(master);
 		}
+	}
+	
+	public void sendMsgToB2B(){
+		InetAddress addr=null;
+		try {
+			addr = InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			logger.error("addr can not get!");
+		}
+		B2BMsgHeader header = new B2BMsgHeader();
+		B2BMsgHeader.B2BMsgDetail data =  header.new B2BMsgDetail();
+		header.setMessage_id("");
+		header.setData(data);
+		data.setMessage_name("SupplierOdmPartInfo_SEND_MSG");
+		data.setMessage_type("Timer");
+		data.setSource_client_ip(addr.getHostAddress());
+		data.setSource_system("SFC");
+		data.setBiz_code("SupplierOdmPartInfo_SEND");
+		data.setMessage_id("");
+		B2BMsgHeader.B2BMsgDetail.Append_data datadetail =  data.new Append_data();
+		datadetail.setPallent("PA10002707");
+		data.setAppend_data(datadetail);
+		String json = JSON.toJSONString(header);
+		System.out.println(json);
+		JSONObject postjson = JSON.parseObject(json);
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> responseEntity =
+				restTemplate.postForEntity("http://10.67.37.83:8082/tencent/message", postjson, String.class);
+        String body = responseEntity.getBody();
+        System.out.println(body);
 	}
 	
 }
