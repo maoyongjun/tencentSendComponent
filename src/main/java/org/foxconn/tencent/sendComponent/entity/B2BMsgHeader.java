@@ -1,31 +1,6 @@
 package org.foxconn.tencent.sendComponent.entity;
 
 public class B2BMsgHeader {
-	private String message_id;
-	private B2BMsgDetail data;
-
-	
-	public String getMessage_id() {
-		return message_id;
-	}
-
-
-	public void setMessage_id(String message_id) {
-		this.message_id = message_id;
-	}
-
-
-	public B2BMsgDetail getData() {
-		return data;
-	}
-
-
-	public void setData(B2BMsgDetail data) {
-		this.data = data;
-	}
-
-
-	public class B2BMsgDetail {
 		private String message_id;
 		private String message_name;
 		private String message_type;
@@ -103,5 +78,4 @@ public class B2BMsgHeader {
 
 		}
 
-	}
 }

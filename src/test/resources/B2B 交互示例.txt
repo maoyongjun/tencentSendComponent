@@ -1,0 +1,17 @@
+RecordTime：2018-08-15 14:55:19,797 
+Job;;MQ/Tencentshipdata/WriteDB 
+            Input:{"DN":"3500270168","SFCIDKEY":""} 
+            Output:消息回寫數據庫OK  
+
+RecordTime：2018-08-15 14:55:19,799 
+Job;POST;MQ/Tencentshipdata 
+            Input:{"message_id":"","message_name":"PoFeedback_SEND_MSG","message_type":"InTime","source_system":"SFC","source_client_ip":"10.67.50.82","biz_code":"PoFeedback_SEND","append_data":{"DN":"3500270168","SFCIDKEY":""}} 
+
+            Output:{"flag":"SUCCESS","message":"success","failure_code":"","data":{"massage_id":"2c6c5142-a058-11e8-ac10-fa163eaf013c"},"Logs":null}
+
+RecordTime：2018-08-15 14:55:19,935 
+Job;POST;MQ/Tencentshipdata/Log 
+            Input:{"log_id":null,"message_id":"2c6c5142-a058-11e8-ac10-fa163eaf013c","call_api_code":"Worker-Message","call_api_ip":"10.67.50.82","method":"POST","start_datetime":"2018-08-15 14:55:19","end_datetime":"2018-08-15 14:55:19","result":"SUCCESS","failure_code":"","log_info":"success","parent_api_code":"SFCjob_MQTencentShipData"} 
+
+            Output:{"flag":"SUCCESS","message":"success","failure_code":"","data":{"log_id":null,"message_id":null,"call_api_code":null,"call_api_ip":null,"method":null,"start_datetime":null,"end_datetime":null,"result":null,"failure_code":null,"log_info":null,"parent_api_code":null},"Logs":null}
+
