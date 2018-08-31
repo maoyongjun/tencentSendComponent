@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class DynamicDataSourceAspect {
     private static final Logger logger = LoggerFactory.getLogger(DynamicDataSourceAspect.class);
 
-    private final String[] QUERY_PREFIX = {"get"};
+    private final String[] QUERY_PREFIX = {"PPPP"};
 
     @Pointcut("execution(* org.foxconn.tencent.sendComponent.dao.*.*(..))")
     public void daoAspect() {

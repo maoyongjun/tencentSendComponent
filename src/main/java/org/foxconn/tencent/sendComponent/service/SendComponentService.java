@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.foxconn.tencent.sendComponent.dao.OsMsgDao;
 import org.foxconn.tencent.sendComponent.entity.B2BMsgHeader;
+import org.foxconn.tencent.sendComponent.entity.B2BMsgResponse;
 import org.foxconn.tencent.sendComponent.entity.Component;
 import org.foxconn.tencent.sendComponent.entity.MMprodmaster;
 import org.foxconn.tencent.sendComponent.entity.OsTestResultJsonModel;
@@ -52,18 +53,31 @@ public class SendComponentService {
 	Logger logger = Logger.getLogger(SendComponentService.class);
 	@PostMapping(path="/SupplierWriteServerPartInfo",consumes="application/json",produces="application/json")
 	public String sendMsg(@RequestBody Pallents pallent){
-		String pallentStr = pallent.getPallent();
-		logger.info("pallent:"+pallentStr);
-		SendMsg msg = new SendMsg();
-		msg.setAction("SupplierWriteServerPartInfo");
-		msg.setMethod("run");
-		msg.setStartCompany("Foxconn");
-		SendMsg.Data data =  msg.new Data();
-		List<SendComponent> sendComponents =osMsgDao.getSendComponent(pallentStr);
-		data.setPartInfo(sendComponents);
-		msg.setData(data);
-		String json = JSON.toJSONString(msg);
-		System.out.println(json);
+		B2BMsgResponse response = new B2BMsgResponse();
+		try {
+			String msgid = pallent.getMessage_id();
+			String pallentStr = pallent.getData().getPallent();
+			logger.info("msgid:"+msgid+","+"pallent:"+pallentStr);
+			SendMsg msg = new SendMsg();
+			msg.setAction("SupplierWriteServerPartInfo");
+			msg.setMethod("run");
+			msg.setStartCompany("Foxconn");
+			SendMsg.Data data =  msg.new Data();
+			List<SendComponent> sendComponents =osMsgDao.getSendComponent(pallentStr);
+			data.setPartInfo(sendComponents);
+			msg.setData(data);
+			response.setData(msg);
+			response.setFailure_code("");
+			response.setFlag("SUCCESS");
+		} catch (Exception e) {
+			logger.error("get component error ",e);
+			response.setFlag("FAIL");
+			response.setMessage("get component error");
+		}
+		
+		String json = JSON.toJSONString(response);
+		logger.info(json);
+		
 		return json;
 		
 	}
@@ -71,7 +85,9 @@ public class SendComponentService {
 	
 	@PostMapping(path="/SupplierWriteOdmPartInfo",consumes="application/json",produces="application/json")
 	public String sendOdmMsg(@RequestBody Pallents pallent){
-		String pallentStr = pallent.getPallent();
+		String msgid = pallent.getMessage_id();
+		String pallentStr = pallent.getData().getPallent();
+		logger.info("msgid:"+msgid+","+"pallent:"+pallentStr);
 		logger.info("pallent:"+pallentStr);
 		SendMsg msg = new SendMsg();
 		msg.setAction("SupplierWriteServerPartInfo");
@@ -136,7 +152,7 @@ public class SendComponentService {
 				try {
 					value = client.downMMprodmastercalls(key);
 				} catch (JCoException e) {
-					logger.error(e.getCause().toString());
+					logger.error("get pn from sap error",e);
 				}
 				logger.info("key:"+key+",value:"+value);
 				if(value!=null&&!"".equals(value)){
