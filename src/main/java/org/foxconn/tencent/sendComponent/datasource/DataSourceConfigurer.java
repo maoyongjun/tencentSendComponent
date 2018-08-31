@@ -56,7 +56,7 @@ public class DataSourceConfigurer {
     @Bean("dynamicDataSource")
     public DataSource dynamicDataSource() {
         DynamicRoutingDataSource dynamicRoutingDataSource = new DynamicRoutingDataSource();
-        Map<Object, Object> dataSourceMap = new HashMap<>(4);
+        Map<Object, Object> dataSourceMap = new HashMap<>(2);
         dataSourceMap.put(DataSourceKey.master.name(), master());
         dataSourceMap.put(DataSourceKey.slave.name(), slave());
 

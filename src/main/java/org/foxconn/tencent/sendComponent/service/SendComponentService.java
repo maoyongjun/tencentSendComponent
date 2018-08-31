@@ -138,7 +138,7 @@ public class SendComponentService {
 				} catch (JCoException e) {
 					logger.error(e.getCause().toString());
 				}
-				logger.info("key:"+key+",value"+value);
+				logger.info("key:"+key+",value:"+value);
 				if(value!=null&&!"".equals(value)){
 					master.setManufacturerpn(value);
 					break;

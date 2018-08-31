@@ -31,10 +31,10 @@ public class DynamicDataSourceContextHolder {
      */
     private static final ThreadLocal<Object> CONTEXT_HOLDER = 
     		new ThreadLocal<Object>();
-    static{
-    	
-    	CONTEXT_HOLDER.set(DataSourceKey.master);
-    }
+//    static{
+//    	
+//    	CONTEXT_HOLDER.set(DataSourceKey.master);
+//    }
 
     /**
      * All DataSource List

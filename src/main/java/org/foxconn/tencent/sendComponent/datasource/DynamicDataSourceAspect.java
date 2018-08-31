@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class DynamicDataSourceAspect {
     private static final Logger logger = LoggerFactory.getLogger(DynamicDataSourceAspect.class);
 
-    private final String[] QUERY_PREFIX = {"find"};
+    private final String[] QUERY_PREFIX = {"get"};
 
     @Pointcut("execution(* org.foxconn.tencent.sendComponent.dao.*.*(..))")
     public void daoAspect() {
@@ -30,16 +30,18 @@ public class DynamicDataSourceAspect {
         Boolean isQueryMethod = isQueryMethod(point.getSignature().getName());
         if (isQueryMethod) {
             DynamicDataSourceContextHolder.useSlaveDataSource();
-            logger.info("Switch DataSource to [{}] in Method [{}]",
-                    DynamicDataSourceContextHolder.getDataSourceKey(), point.getSignature());
+        }else{
+        	DynamicDataSourceContextHolder.useMasterDataSource();
         }
+        logger.info("Switch DataSource to [{}] in Method [{}]",
+                DynamicDataSourceContextHolder.getDataSourceKey(), point.getSignature());
     }
 
     @After("daoAspect())")
     public void restoreDataSource(JoinPoint point) {
-        DynamicDataSourceContextHolder.clearDataSourceKey();
         logger.info("Restore DataSource to [{}] in Method [{}]",
                 DynamicDataSourceContextHolder.getDataSourceKey(), point.getSignature());
+        DynamicDataSourceContextHolder.clearDataSourceKey();
     }
 
     private Boolean isQueryMethod(String methodName) {
