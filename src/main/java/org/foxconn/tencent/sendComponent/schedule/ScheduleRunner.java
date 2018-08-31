@@ -51,7 +51,9 @@ public class ScheduleRunner {
 			public void run() {
 				logger.info("send excel task Begin");
 				try {
-//					sendComponentService.sendMsgToB2B();
+					String pallent ="PA10002707";
+					String action ="SupplierOdmPartInfo_SEND";
+					sendComponentService.sendMsgToB2B(action,pallent);
 //					sendComponentService.updateMMprodmaster();
 					EfoxApiRequest request = new EfoxApiRequest();
 					request.setData(request.new Data());

@@ -162,8 +162,8 @@ public class SendComponentService {
 		}
 	}
 	
-	public String sendMsgToB2B(){
-		String pallent="PA10002707";
+	public String sendMsgToB2B(String action,String pallent){
+//		String pallent="PA10002707";
 		InetAddress addr=null;
 		try {
 			addr = InetAddress.getLocalHost();
@@ -171,11 +171,11 @@ public class SendComponentService {
 			logger.error("addr can not get!");
 		}
 		B2BMQMsgRequest data = new B2BMQMsgRequest();
-		data.setMessage_name("SupplierOdmPartInfo_SEND_MSG");
+		data.setMessage_name(action+"_MSG");
 		data.setMessage_type("Timer");
 		data.setSource_client_ip(addr.getHostAddress());
 		data.setSource_system("SFC");
-		data.setBiz_code("SupplierOdmPartInfo_SEND");
+		data.setBiz_code(action);
 		data.setMessage_id("");
 		B2BMQMsgRequest.Append_data datadetail =  data.new Append_data();
 		datadetail.setPallent(pallent);

@@ -47,12 +47,12 @@ FROM	mfsysproduct  A
 WHERE	location IN (
 SELECT Value FROM dbo.fn_Split(@pallent,',')
 )
-select * from @sntable
+--select * from @sntable
 
 
 
 INSERT INTO @sendComponent(category,PartType,PuchaseNumber,PartModel,PartSN,IdcpName,IdcpAdress)
-SELECT  a.category,B.CONTROLDESC,'EPO','',SN,'',''
+SELECT  a.category,B.CONTROLDESC,'PA20180803001','',SN,'',N'深圳腾讯平湖云仓储利旧TDC1楼102'
 FROM	@sntable a, ECONTROLVALUE b 
 WHERE	b.CONTROLNAME LIKE 'tecent_mapping_category_to_name_%'
 		AND 'tecent_mapping_category_to_name_'+A.category= B.CONTROLNAME
