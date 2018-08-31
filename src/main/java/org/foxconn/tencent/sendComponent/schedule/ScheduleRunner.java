@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.foxconn.tencent.sendComponent.entity.Pallents;
+import org.foxconn.tencent.sendComponent.entity.EfoxApiRequest;
 import org.foxconn.tencent.sendComponent.service.SendComponentService;
 import org.springframework.stereotype.Component;
 
@@ -53,9 +53,9 @@ public class ScheduleRunner {
 				try {
 //					sendComponentService.sendMsgToB2B();
 //					sendComponentService.updateMMprodmaster();
-					Pallents pallent = new Pallents();
-					pallent.setData(pallent.new PallentData());
-					sendComponentService.sendMsg(pallent);
+					EfoxApiRequest request = new EfoxApiRequest();
+					request.setData(request.new Data());
+					sendComponentService.sendMsg(request);
 					
 					
 				} catch (Exception e) {

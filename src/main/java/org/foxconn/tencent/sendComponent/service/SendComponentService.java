@@ -12,15 +12,18 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.foxconn.tencent.sendComponent.dao.OsMsgDao;
-import org.foxconn.tencent.sendComponent.entity.B2BMsgHeader;
-import org.foxconn.tencent.sendComponent.entity.B2BMsgResponse;
-import org.foxconn.tencent.sendComponent.entity.Component;
-import org.foxconn.tencent.sendComponent.entity.MMprodmaster;
-import org.foxconn.tencent.sendComponent.entity.OsTestResultJsonModel;
-import org.foxconn.tencent.sendComponent.entity.Pallents;
-import org.foxconn.tencent.sendComponent.entity.ResultMsg;
-import org.foxconn.tencent.sendComponent.entity.SendComponent;
-import org.foxconn.tencent.sendComponent.entity.SendMsg;
+import org.foxconn.tencent.sendComponent.entity.B2BMQMsgRequest;
+import org.foxconn.tencent.sendComponent.entity.B2BMQMsgRequest.Append_data;
+import org.foxconn.tencent.sendComponent.entity.B2BMQMsgResponse;
+import org.foxconn.tencent.sendComponent.entity.EfoxApiRequest;
+import org.foxconn.tencent.sendComponent.entity.EfoxApiResponse;
+import org.foxconn.tencent.sendComponent.entity.efoxParno.MMprodmaster;
+import org.foxconn.tencent.sendComponent.entity.efoxResult.EfoxComponent;
+import org.foxconn.tencent.sendComponent.entity.efoxResult.OdmPartComponent;
+import org.foxconn.tencent.sendComponent.entity.efoxResult.ServerComponent;
+import org.foxconn.tencent.sendComponent.entity.parseTestResult.OsTestComponent;
+import org.foxconn.tencent.sendComponent.entity.parseTestResult.OsTestResultJsonModel;
+import org.foxconn.tencent.sendComponent.factory.EfoxComponentFactorys;
 import org.foxconn.tencent.sendComponent.sap.MMprodmasterSAPClient;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -36,7 +39,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.sap.conn.jco.JCoException;
 
@@ -45,66 +47,59 @@ import com.sap.conn.jco.JCoException;
 public class SendComponentService {
 //	private String url ="https://tssp.tencent.com/open_api/logic_test";
 	private String url ="http://10.67.37.83:8082/tencent/message";
-	
+	public static String SERVER_ACTION="SupplierWriteServerPartInfo";
+	public static String ODM_ACTION="SupplierWriteOdmPartInfo";
 	@Resource
 	OsMsgDao osMsgDao;
+	@Resource
+	EfoxComponentFactorys factorys;
 	
 	
 	Logger logger = Logger.getLogger(SendComponentService.class);
 	@PostMapping(path="/SupplierWriteServerPartInfo",consumes="application/json",produces="application/json")
-	public String sendMsg(@RequestBody Pallents pallent){
-		B2BMsgResponse response = new B2BMsgResponse();
-		try {
-			String msgid = pallent.getMessage_id();
-			String pallentStr = pallent.getData().getPallent();
-			logger.info("msgid:"+msgid+","+"pallent:"+pallentStr);
-			SendMsg msg = new SendMsg();
-			msg.setAction("SupplierWriteServerPartInfo");
-			msg.setMethod("run");
-			msg.setStartCompany("Foxconn");
-			SendMsg.Data data =  msg.new Data();
-			List<SendComponent> sendComponents =osMsgDao.getSendComponent(pallentStr);
-			data.setPartInfo(sendComponents);
-			msg.setData(data);
-			response.setData(msg);
-			response.setFailure_code("");
-			response.setFlag("SUCCESS");
-		} catch (Exception e) {
-			logger.error("get component error ",e);
-			response.setFlag("FAIL");
-			response.setMessage("get component error");
-		}
-		
-		String json = JSON.toJSONString(response);
-		logger.info(json);
-		
-		return json;
+	public String sendMsg(@RequestBody EfoxApiRequest request){
+		return sendTencentComponent(request,SERVER_ACTION,ServerComponent.class); 
 		
 	}
 	
 	
 	@PostMapping(path="/SupplierWriteOdmPartInfo",consumes="application/json",produces="application/json")
-	public String sendOdmMsg(@RequestBody Pallents pallent){
-		String msgid = pallent.getMessage_id();
-		String pallentStr = pallent.getData().getPallent();
-		logger.info("msgid:"+msgid+","+"pallent:"+pallentStr);
-		logger.info("pallent:"+pallentStr);
-		SendMsg msg = new SendMsg();
-		msg.setAction("SupplierWriteServerPartInfo");
-		msg.setMethod("run");
-		msg.setStartCompany("Foxconn");
-		SendMsg.Data data =  msg.new Data();
-		List<SendComponent> sendComponents =osMsgDao.getSendComponent(pallentStr);
-		data.setPartInfo(sendComponents);
-		msg.setData(data);
-		String json = JSON.toJSONString(msg);
-		System.out.println(json);
-//		JSONObject postjson = JSON.parseObject(json);
-//		RestTemplate restTemplate = new RestTemplate();
-//		ResponseEntity<String> responseEntity =
-//				restTemplate.postForEntity("http://localhost:2489/efoxsfcSSNSTATUS", postjson, String.class);
-//        String body = responseEntity.getBody();
-//        System.out.println(body);
+	public String sendOdmMsg(@RequestBody EfoxApiRequest request){
+		return sendTencentComponent(request,ODM_ACTION,OdmPartComponent.class); 
+	}
+	
+	private <T extends EfoxComponent> String sendTencentComponent(EfoxApiRequest request,String action,Class<T> t){
+		// 回复给B2B的信息
+		EfoxApiResponse response = new EfoxApiResponse();
+		try {
+			String msgid = request.getMessage_id();
+			String pallentStr = request.getData().getPallent();
+			logger.info("msgid:" + msgid + "," + "pallent:" + pallentStr);
+
+			// 创建回复信息 覆盖 请求腾讯接口锁需要的消息，给B2B请求腾讯接口的时候使用。
+			EfoxApiResponse.TencentSendMsgRequest data = response.new TencentSendMsgRequest();
+			response.setData(data);// 附加消息
+			data.setAction(action);
+			data.setMethod("run");
+			data.setStartCompany("Foxconn");
+			// 将要发送出去的附加信息
+			EfoxApiResponse.TencentSendMsgRequest.Data<T> serverComponent = data.new Data<T>();
+			data.setData(serverComponent);
+			EfoxComponentFactorys.EfoxComponentFactory factory = factorys.new EfoxComponentFactory();
+			List<? extends EfoxComponent> sendComponents =factory.getComponent(action,pallentStr);
+			
+			serverComponent.setPartInfo(sendComponents);
+			response.setFailure_code("");
+			response.setFlag("SUCCESS");
+		} catch (Exception e) {
+			logger.error("get component error ", e);
+			response.setFlag("FAIL");
+			response.setMessage("get component error");
+		}
+
+		String json = JSON.toJSONString(response);
+		logger.info(json);
+
 		return json;
 		
 	}
@@ -114,14 +109,14 @@ public class SendComponentService {
 		
 		for(OsTestResultJsonModel model : list){
 			String parentId=UUID.randomUUID().toString();
-			Component result =  JSON.parseObject(model.getJson(),Component.class);
+			OsTestComponent result =  JSON.parseObject(model.getJson(),OsTestComponent.class);
 			result= result.getSystem();
 			result.setLasteditdt(new Date());
 			result.setId(parentId);
 			osMsgDao.addComponent(result);
 			String type="";
 			int id=1;
-			for(Component com :result.getComponent()){
+			for(OsTestComponent com :result.getComponent()){
 				if(com.getType()!=null&&!"".equals(com.getType())){
 					type=com.getType();
 				}else{
@@ -175,14 +170,14 @@ public class SendComponentService {
 		} catch (UnknownHostException e) {
 			logger.error("addr can not get!");
 		}
-		B2BMsgHeader data = new B2BMsgHeader();
+		B2BMQMsgRequest data = new B2BMQMsgRequest();
 		data.setMessage_name("SupplierOdmPartInfo_SEND_MSG");
 		data.setMessage_type("Timer");
 		data.setSource_client_ip(addr.getHostAddress());
 		data.setSource_system("SFC");
 		data.setBiz_code("SupplierOdmPartInfo_SEND");
 		data.setMessage_id("");
-		B2BMsgHeader.Append_data datadetail =  data.new Append_data();
+		B2BMQMsgRequest.Append_data datadetail =  data.new Append_data();
 		datadetail.setPallent(pallent);
 		data.setAppend_data(datadetail);
 		String json = JSON.toJSONString(data);
@@ -197,9 +192,9 @@ public class SendComponentService {
 		if(null==resultMsg){
 			return "";
 		}
-        ResultMsg result = JSON.parseObject(resultMsg, ResultMsg.class);
+        B2BMQMsgResponse result = JSON.parseObject(resultMsg, B2BMQMsgResponse.class);
         System.out.println(result);
-        ResultMsg.Data resultData =  result.getData();
+        B2BMQMsgResponse.Data resultData =  result.getData();
         
         if(resultData!=null){
         	return resultData.getMassage_id();

@@ -3,7 +3,7 @@
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
  <mapper namespace="org.foxconn.tencent.sendComponent.dao.OsMsgDao">
  
- 	<select id="findAll"  parameterType="map" statementType="CALLABLE" resultType="org.foxconn.tencent.sendComponent.entity.OsTestResultJsonModel">
+ 	<select id="findAll"  parameterType="map" statementType="CALLABLE" resultType="org.foxconn.tencent.sendComponent.entity.parseTestResult.OsTestResultJsonModel">
  		<![CDATA[
 		    {call efoxsfcgetTencentShipoutExcelMsg
 		     (#{ssn,mode=IN,jdbcType=VARCHAR},
@@ -14,7 +14,7 @@
 		]]>
  	</select>
  	
- 	<select id="getTestResult"  statementType="CALLABLE" resultType="org.foxconn.tencent.sendComponent.entity.OsTestResultJsonModel">
+ 	<select id="getTestResult"  statementType="CALLABLE" resultType="org.foxconn.tencent.sendComponent.entity.parseTestResult.OsTestResultJsonModel">
  		<![CDATA[
 		    {call eFoxSFCMarkSNParsed
 		     ()
@@ -22,11 +22,11 @@
 		]]>
  	</select>
  	
- 	<insert id="addComponent" parameterType="org.foxconn.tencent.sendComponent.entity.Component">
+ 	<insert id="addComponent" parameterType="org.foxconn.tencent.sendComponent.entity.parseTestResult.OsTestComponent">
  		INSERT INTO efoxSFCTencentComponent(ID,SN,PN,FW,CTYPE,PARENTID,lasteditdt) values (#{id},#{sn},#{pn},#{fw},#{type},#{parentId},#{lasteditdt})
  	</insert>
  	
- 	<select id="getSendComponent"  statementType="CALLABLE" resultType="org.foxconn.tencent.sendComponent.entity.SendComponent">
+ 	<select id="getSendComponent"  statementType="CALLABLE" resultType="org.foxconn.tencent.sendComponent.entity.efoxResult.ServerComponent">
  		<![CDATA[
 		    {call efoxsfcgetTencentSendComponent
 		     (#{pallents})
@@ -34,12 +34,20 @@
 		]]>
  	</select>
  	
- 	<update id="updateMMprocomponent" parameterType="org.foxconn.tencent.sendComponent.entity.MMprodmaster">
+ 	 <select id="getOdmComponent"  statementType="CALLABLE" resultType="org.foxconn.tencent.sendComponent.entity.efoxResult.OdmPartComponent">
+ 		<![CDATA[
+		    {call efoxsfcgetTencentSendOdmPart
+		     (#{pallents})
+		     }
+		]]>
+ 	</select>
+ 	
+ 	<update id="updateMMprocomponent" parameterType="org.foxconn.tencent.sendComponent.entity.efoxParno.MMprodmaster">
  		update mmprodmaster set manufacturerpn = #{manufacturerpn} where partno =#{partno}
  		
  	</update>
  	
- 	<select id="findSkunos" resultType="org.foxconn.tencent.sendComponent.entity.MMprodmaster">
+ 	<select id="findSkunos" resultType="org.foxconn.tencent.sendComponent.entity.efoxParno.MMprodmaster">
  		select	DISTINCT B.partno
 		from	mfworkorder A,mfworkdetail B  
 		WHERE	routeid  LIKE 'LXTe%' 

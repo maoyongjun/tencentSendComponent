@@ -1,12 +1,12 @@
-package org.foxconn.tencent.sendComponent.entity;
+package org.foxconn.tencent.sendComponent.entity.parseTestResult;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Component{
+public class OsTestComponent{
 	//解析根节点
-	private Component system;
+	private OsTestComponent system;
 	
 	//写入数据库时记录ID
 	private String id;
@@ -18,23 +18,23 @@ public class Component{
 	private String fw;
 	private String type;
 	
-	private Component board;
-	private List<Component> cpu= new ArrayList<Component>();
-	private List<Component> hdd= new ArrayList<Component>();
-	private List<Component> memory= new ArrayList<Component>();
-	private List<Component> nic= new ArrayList<Component>();
-	private List<Component> psu= new ArrayList<Component>();
-	private Component raid;
-	private Component hba;
-	private List<Component> bp= new ArrayList<Component>();
+	private OsTestComponent board;
+	private List<OsTestComponent> cpu= new ArrayList<OsTestComponent>();
+	private List<OsTestComponent> hdd= new ArrayList<OsTestComponent>();
+	private List<OsTestComponent> memory= new ArrayList<OsTestComponent>();
+	private List<OsTestComponent> nic= new ArrayList<OsTestComponent>();
+	private List<OsTestComponent> psu= new ArrayList<OsTestComponent>();
+	private OsTestComponent raid;
+	private OsTestComponent hba;
+	private List<OsTestComponent> bp= new ArrayList<OsTestComponent>();
 	
-	private List<Component> component= new ArrayList<Component>();
+	private List<OsTestComponent> component= new ArrayList<OsTestComponent>();
 
-	public Component getSystem() {
+	public OsTestComponent getSystem() {
 		return system;
 	}
 
-	public void setSystem(Component system) {
+	public void setSystem(OsTestComponent system) {
 		this.system = system;
 	}
 
@@ -70,11 +70,11 @@ public class Component{
 		this.type = type;
 	}
 
-	public Component getBoard() {
+	public OsTestComponent getBoard() {
 		return board;
 	}
 
-	public void setBoard(Component board) {
+	public void setBoard(OsTestComponent board) {
 		if(null!=board){
 			board.setType("主板");
 			component.add(board);
@@ -83,11 +83,11 @@ public class Component{
 		this.board = board;
 	}
 
-	public List<Component> getCpu() {
+	public List<OsTestComponent> getCpu() {
 		return cpu;
 	}
 
-	public void setCpu(List<Component> cpu) {
+	public void setCpu(List<OsTestComponent> cpu) {
 		if(cpu.size()>0){
 			cpu.get(0).setType("CPU");
 			component.addAll(cpu);
@@ -95,11 +95,11 @@ public class Component{
 		this.cpu = cpu;
 	}
 
-	public List<Component> getHdd() {
+	public List<OsTestComponent> getHdd() {
 		return hdd;
 	}
 
-	public void setHdd(List<Component> hdd) {
+	public void setHdd(List<OsTestComponent> hdd) {
 		if(hdd.size()>0){
 			hdd.get(0).setType("硬盘");
 			component.addAll(hdd);
@@ -107,11 +107,11 @@ public class Component{
 		this.hdd = hdd;
 	}
 
-	public List<Component> getMemory() {
+	public List<OsTestComponent> getMemory() {
 		return memory;
 	}
 
-	public void setMemory(List<Component> memory) {
+	public void setMemory(List<OsTestComponent> memory) {
 		if(memory.size()>0){
 			memory.get(0).setType("内存");
 			component.addAll(memory);
@@ -119,11 +119,11 @@ public class Component{
 		this.memory = memory;
 	}
 
-	public List<Component> getNic() {
+	public List<OsTestComponent> getNic() {
 		return nic;
 	}
 
-	public void setNic(List<Component> nic) {
+	public void setNic(List<OsTestComponent> nic) {
 		if(nic.size()>0){
 			nic.get(0).setType("网卡");
 			component.addAll(nic);
@@ -131,11 +131,11 @@ public class Component{
 		this.nic = nic;
 	}
 
-	public List<Component> getPsu() {
+	public List<OsTestComponent> getPsu() {
 		return psu;
 	}
 
-	public void setPsu(List<Component> psu) {
+	public void setPsu(List<OsTestComponent> psu) {
 		if(psu.size()>0){
 			psu.get(0).setType("电源");
 			component.addAll(psu);
@@ -143,11 +143,11 @@ public class Component{
 		this.psu = psu;
 	}
 
-	public Component getRaid() {
+	public OsTestComponent getRaid() {
 		return raid;
 	}
 
-	public void setRaid(Component raid) {
+	public void setRaid(OsTestComponent raid) {
 		if(null!=raid){
 			raid.setType("RAID卡");
 			component.add(raid);
@@ -155,11 +155,11 @@ public class Component{
 		this.raid = raid;
 	}
 
-	public Component getHba() {
+	public OsTestComponent getHba() {
 		return hba;
 	}
 
-	public void setHba(Component hba) {
+	public void setHba(OsTestComponent hba) {
 		if(null!=hba){
 			hba.setType("HBA卡");
 			component.add(hba);
@@ -167,11 +167,11 @@ public class Component{
 		this.hba = hba;
 	}
 
-	public List<Component> getBp() {
+	public List<OsTestComponent> getBp() {
 		return bp;
 	}
 
-	public void setBp(List<Component> bp) {
+	public void setBp(List<OsTestComponent> bp) {
 		if(bp.size()>0){
 			bp.get(0).setType("背板");
 			component.addAll(bp);
@@ -181,12 +181,12 @@ public class Component{
 
 
 
-	public List<Component> getComponent() {
+	public List<OsTestComponent> getComponent() {
 		return component;
 	}
 
-	public void setComponent(List<Component> component) {
-		this.component = component;
+	public void setComponent(List<OsTestComponent> OsTestComponent) {
+		this.component = OsTestComponent;
 	}
 
 	public String getId() {

@@ -1,9 +1,9 @@
 package org.foxconn.tencent.sendComponent.entity;
 
-public class Pallents {
+public class EfoxApiRequest {
 	private String message_id;
 	
-	private PallentData data;
+	private Data data;
 	
 	public String getMessage_id() {
 		return message_id;
@@ -12,16 +12,16 @@ public class Pallents {
 	public void setMessage_id(String message_id) {
 		this.message_id = message_id;
 	}
-
-	public PallentData getData() {
+	
+	public Data getData() {
 		return data;
 	}
 
-	public void setData(PallentData data) {
+	public void setData(Data data) {
 		this.data = data;
 	}
 
-	public class PallentData{
+	public class Data{
 		
 		private String pallent;
 	

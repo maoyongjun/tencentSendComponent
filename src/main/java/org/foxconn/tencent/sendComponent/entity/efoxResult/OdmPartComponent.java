@@ -1,8 +1,8 @@
-package org.foxconn.tencent.sendComponent.entity;
+package org.foxconn.tencent.sendComponent.entity.efoxResult;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class OdmPart {
+public class OdmPartComponent extends EfoxComponent{
 	@JSONField(name="Id")
 	private String id;
 	@JSONField(name="PartType")

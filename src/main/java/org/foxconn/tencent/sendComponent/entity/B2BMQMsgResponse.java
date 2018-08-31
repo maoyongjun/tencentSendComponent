@@ -1,6 +1,6 @@
 package org.foxconn.tencent.sendComponent.entity;
 
-public class ResultMsg {
+public class B2BMQMsgResponse {
 	private Data   data;
 	private String failure_code;
 	private String flag;

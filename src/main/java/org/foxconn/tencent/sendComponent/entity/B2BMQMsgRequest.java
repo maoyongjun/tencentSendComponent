@@ -1,6 +1,6 @@
 package org.foxconn.tencent.sendComponent.entity;
 
-public class B2BMsgHeader {
+public class B2BMQMsgRequest {
 		private String message_id;
 		private String message_name;
 		private String message_type;

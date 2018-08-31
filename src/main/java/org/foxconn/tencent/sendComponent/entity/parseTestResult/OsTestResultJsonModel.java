@@ -1,4 +1,4 @@
-package org.foxconn.tencent.sendComponent.entity;
+package org.foxconn.tencent.sendComponent.entity.parseTestResult;
 
 public class OsTestResultJsonModel {
 	private String ssn;

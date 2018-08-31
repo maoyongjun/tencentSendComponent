@@ -1,4 +1,4 @@
-package org.foxconn.tencent.sendComponent.entity;
+package org.foxconn.tencent.sendComponent.entity.efoxParno;
 
 public class MMprodmaster {
 	private String partno ;
