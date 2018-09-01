@@ -2,6 +2,7 @@ package org.foxconn.tencent.sendComponent.service;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +13,8 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.foxconn.tencent.sendComponent.dao.OsMsgDao;
+import org.foxconn.tencent.sendComponent.entity.B2BLogMsgRequest;
 import org.foxconn.tencent.sendComponent.entity.B2BMQMsgRequest;
-import org.foxconn.tencent.sendComponent.entity.B2BMQMsgRequest.Append_data;
 import org.foxconn.tencent.sendComponent.entity.B2BMQMsgResponse;
 import org.foxconn.tencent.sendComponent.entity.EfoxApiRequest;
 import org.foxconn.tencent.sendComponent.entity.EfoxApiResponse;
@@ -46,7 +47,8 @@ import com.sap.conn.jco.JCoException;
 @Service
 public class SendComponentService {
 //	private String url ="https://tssp.tencent.com/open_api/logic_test";
-	private String url ="http://10.67.37.83:8082/tencent/message";
+	private String mqUrl ="http://10.67.37.83:8082/tencent/message";
+	private String logUrl="http://10.67.37.83:8082/logs";
 	public static String SERVER_ACTION="SupplierWriteServerPartInfo";
 	public static String ODM_ACTION="SupplierWriteOdmPartInfo";
 	@Resource
@@ -91,6 +93,7 @@ public class SendComponentService {
 			serverComponent.setPartInfo(sendComponents);
 			response.setFailure_code("");
 			response.setFlag("SUCCESS");
+			response.setMessage("success");
 		} catch (Exception e) {
 			logger.error("get component error ", e);
 			response.setFlag("FAIL");
@@ -161,8 +164,50 @@ public class SendComponentService {
 			osMsgDao.updateMMprocomponent(master);
 		}
 	}
+	public String sendLogMsgToB2B(String msgId,String action){
+		InetAddress addr=null;
+		try {
+			addr = InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			logger.error("addr can not get!");
+		}
+		B2BLogMsgRequest logMsg = new B2BLogMsgRequest();
+		logMsg.setLog_id("");
+		logMsg.setMessage_id(msgId);
+		logMsg.setCall_api_code("Worker-Message");
+		logMsg.setMethod("POST");
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+		logMsg.setStart_datetime(sdf.format(new Date()));
+		logMsg.setEnd_datetime(sdf.format(new Date()));
+		logMsg.setResult("SUCCESS");
+		logMsg.setFailure_code("");
+		logMsg.setLog_info("success");
+		logMsg.setParent_api_code("SFCjob_"+action);
+		logMsg.setCall_api_ip(addr.getHostAddress());
+		String json = JSON.toJSONString(logMsg);
+		logger.info("send to b2b logApi request-->"+json);
+		String resultMsg=null;
+		try {
+			resultMsg = sendFormData(logUrl,json);
+		} catch (Exception e) {
+			logger.error(e.toString());
+			logger.error("get mesId From B2B Error");
+		}
+		if(null==resultMsg){
+			return "";
+		}
+		logger.info("send to b2b logApi response-->"+resultMsg);
+        B2BMQMsgResponse result = JSON.parseObject(resultMsg, B2BMQMsgResponse.class);
+        logger.info(result);
+        B2BMQMsgResponse.Data resultData =  result.getData();
+        if(resultData!=null){
+        	return resultData.getMassage_id();
+        }else{
+        	return "";
+        }
+	}
 	
-	public String sendMsgToB2B(String action,String pallent){
+	public String sendMQMsgToB2B(String action,String pallent){
 //		String pallent="PA10002707";
 		InetAddress addr=null;
 		try {
@@ -181,10 +226,10 @@ public class SendComponentService {
 		datadetail.setPallent(pallent);
 		data.setAppend_data(datadetail);
 		String json = JSON.toJSONString(data);
-		logger.info("send to b2b:"+json);
+		logger.info("send to b2b MQApi  request-->"+json);
 		String resultMsg=null;
 		try {
-			resultMsg = sendFormData(url,json);
+			resultMsg = sendFormData(mqUrl,json);
 		} catch (Exception e) {
 			logger.error(e.toString());
 			logger.error("get mesId From B2B Error");
@@ -192,8 +237,9 @@ public class SendComponentService {
 		if(null==resultMsg){
 			return "";
 		}
+		logger.info("send to b2b MQApi  response-->"+resultMsg);
         B2BMQMsgResponse result = JSON.parseObject(resultMsg, B2BMQMsgResponse.class);
-        System.out.println(result);
+        logger.info(result);
         B2BMQMsgResponse.Data resultData =  result.getData();
         
         if(resultData!=null){
@@ -225,7 +271,7 @@ public class SendComponentService {
 		Map<String,String> map = new HashMap<>();
 		map.put("data", postjson);
 		HttpEntity<String> httpEntity = new HttpEntity(gson.toJson(map), httpHeaders);
-		ResponseEntity responseEntity = restTemplate.exchange(url, HttpMethod.POST, httpEntity, Object.class); 
+		ResponseEntity responseEntity = restTemplate.exchange(mqUrl, HttpMethod.POST, httpEntity, Object.class); 
 		responseEntity.getBody();
 		return "";
 	}

@@ -11,6 +11,14 @@ public class EfoxApiResponse {
 	private String 	flag;
 	private String 	message;
 	private String 	failure_code;
+	private List<String> logs = new ArrayList<String>();
+	
+	public List<String> getLogs() {
+		return logs;
+	}
+	public void setLogs(List<String> logs) {
+		this.logs = logs;
+	}
 	private TencentSendMsgRequest data;
 	public String getFlag() {
 		return flag;
