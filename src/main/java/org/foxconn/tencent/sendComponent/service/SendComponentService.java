@@ -22,6 +22,7 @@ import org.foxconn.tencent.sendComponent.entity.efoxParno.MMprodmaster;
 import org.foxconn.tencent.sendComponent.entity.efoxResult.EfoxComponent;
 import org.foxconn.tencent.sendComponent.entity.efoxResult.OdmPartComponent;
 import org.foxconn.tencent.sendComponent.entity.efoxResult.ServerComponent;
+import org.foxconn.tencent.sendComponent.entity.log.EfoxLogModel;
 import org.foxconn.tencent.sendComponent.entity.parseTestResult.OsTestComponent;
 import org.foxconn.tencent.sendComponent.entity.parseTestResult.OsTestResultJsonModel;
 import org.foxconn.tencent.sendComponent.factory.EfoxComponentFactorys;
@@ -75,8 +76,15 @@ public class SendComponentService {
 	private <T extends EfoxComponent> String sendTencentComponent(EfoxApiRequest request,String action,Class<T> t){
 		// 回复给B2B的信息
 		EfoxApiResponse response = new EfoxApiResponse();
+		String msgid ="";
 		try {
-			String msgid = request.getMessage_id();
+			
+			msgid = request.getMessage_id();
+			try {
+				addLog(action, msgid, EfoxLogModel.RECEIVE, JSON.toJSONString(request));
+			} catch (Exception e) {
+				logger.error("record log Error: ", e);
+			}
 			String pallentStr = request.getData().getPallent();
 			logger.info("msgid:" + msgid + "," + "pallent:" + pallentStr);
 
@@ -104,7 +112,11 @@ public class SendComponentService {
 
 		String json = JSON.toJSONString(response);
 		logger.info(json);
-
+		try {
+			addLog(action, msgid, EfoxLogModel.RETURN, json);
+		} catch (Exception e) {
+			logger.error("record log Error: ", e);
+		}
 		return json;
 		
 	}
@@ -182,6 +194,11 @@ public class SendComponentService {
 		logMsg.setCall_api_ip(serverIp);
 		String json = JSON.toJSONString(logMsg);
 		logger.info("send to b2b logApi request-->"+json);
+		try {
+			addLog("SFCjob_"+action, msgId, EfoxLogModel.REQUEST, json);
+		} catch (Exception e) {
+			logger.error("recode b2b logApi log Error: ", e);
+		}
 		String resultMsg=null;
 		try {
 			resultMsg = sendFormData(logUrl,json);
@@ -193,6 +210,11 @@ public class SendComponentService {
 			return "";
 		}
 		logger.info("send to b2b logApi response-->"+resultMsg);
+		try {
+			addLog("SFCjob_"+action, msgId, EfoxLogModel.RESPONSE, resultMsg);
+		} catch (Exception e) {
+			logger.error("recode b2b logApi log Error: ", e);
+		}
         B2BMQMsgResponse result = JSON.parseObject(resultMsg, B2BMQMsgResponse.class);
         logger.info(result);
         B2BMQMsgResponse.Data resultData =  result.getData();
@@ -205,6 +227,7 @@ public class SendComponentService {
 	
 	public String sendMQMsgToB2B(String action,String pallent){
 //		String pallent="PA10002707";
+		String msgId="";
 		InetAddress addr=null;
 		try {
 			addr = InetAddress.getLocalHost();
@@ -223,6 +246,11 @@ public class SendComponentService {
 		data.setAppend_data(datadetail);
 		String json = JSON.toJSONString(data);
 		logger.info("send to b2b MQApi  request-->"+json);
+		try {
+			addLog("B2Blog_"+action, msgId, EfoxLogModel.REQUEST, json);
+		} catch (Exception e) {
+			logger.error("send b2b MQApi log Error: ", e);
+		}
 		String resultMsg=null;
 		try {
 			resultMsg = sendFormData(mqUrl,json);
@@ -234,15 +262,22 @@ public class SendComponentService {
 			return "";
 		}
 		logger.info("send to b2b MQApi  response-->"+resultMsg);
+		
         B2BMQMsgResponse result = JSON.parseObject(resultMsg, B2BMQMsgResponse.class);
         logger.info(result);
         B2BMQMsgResponse.Data resultData =  result.getData();
         
         if(resultData!=null){
-        	return resultData.getMassage_id();
+        	msgId= resultData.getMassage_id();
         }else{
-        	return "";
+        	msgId= "";
         }
+        try {
+			addLog("B2Blog_"+action, msgId, EfoxLogModel.RESPONSE, resultMsg);
+		} catch (Exception e) {
+			logger.error("send b2b MQApi log Error: ", e);
+		}
+        return msgId;
         
    }
 	
@@ -272,6 +307,18 @@ public class SendComponentService {
 		return "";
 	}
 	
-	
+	private void addLog(String apiname,String msgId,String msgType,String data){
+		EfoxLogModel log = new EfoxLogModel();
+		log.setLogDate(new Date());
+		log.setData(data);
+		log.setApiname(apiname);
+		log.setMsgId(msgId);
+		log.setMsgType(msgType);
+		try {
+			this.osMsgDao.addLog(log);
+		} catch (Exception e) {
+			logger.error("recode log error:",e);
+		}
+	}
 	
 }

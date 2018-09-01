@@ -54,6 +54,12 @@
 				AND A.workorderno = B.workorderno
 				AND B.categoryname  IN ('MG67','MG95')
  	</select>
+ 	<insert id="addLog" parameterType="org.foxconn.tencent.sendComponent.entity.log.EfoxLogModel">
+ 		INSERT INTO efoxSFCTencentSendLog(logDate,apiname,msgId,msgType,data) 
+ 		VALUES(
+ 		#{logDate},#{apiname},#{msgId},#{msgType},#{data}
+ 		)
+ 	</insert>
  	
  </mapper>        
  

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.foxconn.tencent.sendComponent.entity.efoxParno.MMprodmaster;
 import org.foxconn.tencent.sendComponent.entity.efoxResult.OdmPartComponent;
 import org.foxconn.tencent.sendComponent.entity.efoxResult.ServerComponent;
+import org.foxconn.tencent.sendComponent.entity.log.EfoxLogModel;
 import org.foxconn.tencent.sendComponent.entity.parseTestResult.OsTestComponent;
 import org.foxconn.tencent.sendComponent.entity.parseTestResult.OsTestResultJsonModel;
 import org.springframework.dao.DataAccessException;
@@ -31,5 +32,9 @@ public interface OsMsgDao{
 	
 	//获取原物料出货的数据
 	public List<OdmPartComponent> getOdmComponent(String pallents) throws DataAccessException;
+	
+	//记录log
+	public void addLog(EfoxLogModel log) throws DataAccessException;
+	
 	
 }
