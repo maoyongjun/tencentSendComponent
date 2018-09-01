@@ -47,8 +47,10 @@ import com.sap.conn.jco.JCoException;
 @Service
 public class SendComponentService {
 //	private String url ="https://tssp.tencent.com/open_api/logic_test";
-	private String mqUrl ="http://10.67.37.83:8082/tencent/message";
-	private String logUrl="http://10.67.37.83:8082/logs";
+	private String serverIp="10.67.37.83";
+	private String serverPort="8082";
+	private String mqUrl ="http://"+serverIp+":"+serverPort+"/tencent/message";
+	private String logUrl="http://"+serverIp+":"+serverPort+"/logs";
 	public static String SERVER_ACTION="SupplierWriteServerPartInfo";
 	public static String ODM_ACTION="SupplierWriteOdmPartInfo";
 	@Resource
@@ -165,12 +167,6 @@ public class SendComponentService {
 		}
 	}
 	public String sendLogMsgToB2B(String msgId,String action){
-		InetAddress addr=null;
-		try {
-			addr = InetAddress.getLocalHost();
-		} catch (UnknownHostException e) {
-			logger.error("addr can not get!");
-		}
 		B2BLogMsgRequest logMsg = new B2BLogMsgRequest();
 		logMsg.setLog_id("");
 		logMsg.setMessage_id(msgId);
@@ -183,7 +179,7 @@ public class SendComponentService {
 		logMsg.setFailure_code("");
 		logMsg.setLog_info("success");
 		logMsg.setParent_api_code("SFCjob_"+action);
-		logMsg.setCall_api_ip(addr.getHostAddress());
+		logMsg.setCall_api_ip(serverIp);
 		String json = JSON.toJSONString(logMsg);
 		logger.info("send to b2b logApi request-->"+json);
 		String resultMsg=null;
