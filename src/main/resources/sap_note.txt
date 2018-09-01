@@ -1,0 +1,2 @@
+将sapjco3.dll放入windows/system32目录下面
+否则java的jco无法调用
