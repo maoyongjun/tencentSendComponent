@@ -320,5 +320,15 @@ public class SendComponentService {
 			logger.error("recode log error:",e);
 		}
 	}
+	public String getSendPallents(String transtype){
+		String pallents="";
+		try {
+			pallents = this.osMsgDao.getSendPallents(transtype);
+		} catch (Exception e) {
+			logger.error("get Pallents  error:",e);
+			addLog("fc_getSendPallents","",EfoxLogModel.REQUEST,"get Pallents  error");
+		}
+		return pallents;
+	}
 	
 }

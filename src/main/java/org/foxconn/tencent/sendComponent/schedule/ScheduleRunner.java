@@ -51,12 +51,12 @@ public class ScheduleRunner {
 			public void run() {
 				logger.info("send excel task Begin");
 				try {
-					String pallent ="PA10002707";
+					String pallent =sendComponentService.getSendPallents("SERVER");
 					String action ="SupplierServerPartInfo_SEND";
 					String msgId = sendComponentService.sendMQMsgToB2B(action,pallent);
 					sendComponentService.sendLogMsgToB2B(msgId, "SupplierServerPartInfo");
 					
-					pallent="QSP183327717";
+					pallent=sendComponentService.getSendPallents("ODM");
 					action ="SupplierOdmPartInfo_SEND";
 					msgId = sendComponentService.sendMQMsgToB2B(action,pallent);
 					sendComponentService.sendLogMsgToB2B(msgId, "SupplierOdmPartInfo");

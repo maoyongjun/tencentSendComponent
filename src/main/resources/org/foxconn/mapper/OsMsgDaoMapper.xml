@@ -61,5 +61,13 @@
  		)
  	</insert>
  	
+ 	<select id="getSendPallents"  statementType="CALLABLE" parameterType="string" resultType="string">
+ 		<![CDATA[
+		    {call efoxsfcgetTencentSendPallents
+		     (#{transtype})
+		     }
+		]]>
+ 	</select>
+ 	
  </mapper>        
  

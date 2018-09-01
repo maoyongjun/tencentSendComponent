@@ -36,5 +36,8 @@ public interface OsMsgDao{
 	//记录log
 	public void addLog(EfoxLogModel log) throws DataAccessException;
 	
+	//获取要发送整机数据的箱号
+	public String getSendPallents(String transtype) throws DataAccessException;
+	
 	
 }

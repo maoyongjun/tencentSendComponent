@@ -2,7 +2,7 @@
 ALTER PROCEDURE eFoxSFCMarkSNParsed
 
 AS 
-	DECLARE @lastPareDate DATE
+	DECLARE @lastPareDate DATETIME
 	SET @lastPareDate = '1990-01-01 00:00:00.000'
 	--SET @lastPareDate = '2018-08-09 01:21:15.413'
 	
