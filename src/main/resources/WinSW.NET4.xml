@@ -1,0 +1,8 @@
+<service>
+      <id>tencentSendComponent</id>
+      <name>tencentSendComponent</name>
+      <description>To start my app as a service.</description>
+      <executable>java</executable>
+      <arguments>-Xmx512m -jar D:\tencentsendComponet\tencentSendComponent-0.0.1-SNAPSHOT.jar --server.port=8089</arguments>
+      <logmode>rotate</logmode>
+</service>

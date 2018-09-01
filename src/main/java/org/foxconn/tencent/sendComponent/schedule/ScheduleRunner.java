@@ -40,8 +40,7 @@ public class ScheduleRunner {
 	
 	public void addRunnables(){
 		addSendExcelRunnable();
-//		addupdatePnMapRunnable();
-//		addClearPnMapRunnable();
+		addupdatePnMapRunnable();
 	}
 	
 	
@@ -51,21 +50,20 @@ public class ScheduleRunner {
 			public void run() {
 				logger.info("send excel task Begin");
 				try {
+					String msgId ="";
+					String action ="";
 					String pallent =sendComponentService.getSendPallents("SERVER");
-					String action ="SupplierServerPartInfo_SEND";
-					String msgId = sendComponentService.sendMQMsgToB2B(action,pallent);
-					sendComponentService.sendLogMsgToB2B(msgId, "SupplierServerPartInfo");
-					
+					if(!"".equals(pallent)){
+						action ="SupplierServerPartInfo_SEND";
+						msgId = sendComponentService.sendMQMsgToB2B(action,pallent);
+						sendComponentService.sendLogMsgToB2B(msgId, "SupplierServerPartInfo");
+					}
 					pallent=sendComponentService.getSendPallents("ODM");
-					action ="SupplierOdmPartInfo_SEND";
-					msgId = sendComponentService.sendMQMsgToB2B(action,pallent);
-					sendComponentService.sendLogMsgToB2B(msgId, "SupplierOdmPartInfo");
-					
-//					sendComponentService.updateMMprodmaster();
-//					EfoxApiRequest request = new EfoxApiRequest();
-//					request.setData(request.new Data());
-//					sendComponentService.sendMsg(request);
-					
+					if(!"".equals(pallent)){
+						action ="SupplierOdmPartInfo_SEND";
+						msgId = sendComponentService.sendMQMsgToB2B(action,pallent);
+						sendComponentService.sendLogMsgToB2B(msgId, "SupplierOdmPartInfo");
+					}
 					
 				} catch (Exception e) {
 					logger.error("send excel task Error",e);
@@ -76,40 +74,16 @@ public class ScheduleRunner {
 		oneDayRunnables.add(runnable);
 	}
 	
-//	public void addupdatePnMapRunnable(){
-//		Runnable runnable = new Runnable() {
-//			@Override
-//			public void run() {
-//				logger.info("update pn Map task Begin");
-//				MMprodmasterSAPClient client = new MMprodmasterSAPClient();
-//				for(String key :org.foxconn.tencent.shipoutExcel.entity.Component.pnmap.keySet())
-//				{
-//					String value=null;
-//					try {
-//						value = client.downMMprodmastercalls(key);
-//					} catch (JCoException e) {
-//						logger.error(e.getCause().toString());
-//					}
-//					org.foxconn.tencent.shipoutExcel.entity.Component.pnmap.put(key, value);
-//					logger.info("key:"+key+",value"+value);
-//				}
-//					
-//				logger.info("update pn Map task End");
-//			}
-//		};
-//		oneHoursRunnables.add(runnable);
-//	}
-//	
-//	public void addClearPnMapRunnable(){
-//		Runnable runnable = new Runnable() {
-//			@Override
-//			public void run() {
-//				logger.info("clear pn Map task Begin");
-//				org.foxconn.tencent.shipoutExcel.entity.Component.pnmap= new HashMap<>();
-//				logger.info("clear pn Map task End");
-//			}
-//		};
-//		oneWeekRunnables.add(runnable);
-//	}
 	
+	public void addupdatePnMapRunnable(){
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				logger.info("update pn Map task Begin");
+				sendComponentService.updateMMprodmaster();
+				logger.info("update pn Map task End");
+			}
+		};
+		oneHoursRunnables.add(runnable);
+	}
 }
