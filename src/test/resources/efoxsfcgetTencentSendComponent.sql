@@ -1,6 +1,6 @@
 --exec [efoxsfcgetTencentSendComponent] 'PA10002707'
 
-alter PROCEDURE [dbo].[efoxsfcgetTencentSendComponent]
+ALTER PROCEDURE [dbo].[efoxsfcgetTencentSendComponent]
 (
  @pallent VARCHAR(MAX)
 )
@@ -56,7 +56,7 @@ insert into @sendOsComponent
 SELECT	T2.Assetcode,T1.* 
 FROM	(	
 			SELECT		A2.SN AS PARENTSN,A1.CTYPE,A1.PN,A1.SN,A1.FW ,
-						ROW_NUMBER() over(PARTITION BY A1.PARENTID,A1.CTYPE order by A1.SN,A1.CTYPE,right(A1.sn,8)) AS NUM   
+						ROW_NUMBER() over(PARTITION BY A1.PARENTID,A1.CTYPE order by A1.SN,A1.CTYPE,CASE WHEN  A1.CTYPE =N'硬盘' THEN a1.SN ELSE right(A1.sn,8) END) AS NUM   
 			FROM		efoxSFCTencentComponent  A1, efoxSFCTencentComponent A2
 			WHERE		A1.PARENTID = A2.ID AND A2.SN IN (SELECT SN FROM @sntable)
 						AND NOT  (A1.SN='' AND A1.PN='' AND A1.FW='')
