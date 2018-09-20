@@ -131,7 +131,7 @@ public class SendComponentService {
 			String parentId=UUID.randomUUID().toString();
 			OsTestComponent result =  JSON.parseObject(model.getJson(),OsTestComponent.class);
 			result= result.getSystem();
-			result.setLasteditdt(new Date());
+			result.setLasteditdt(model.getLasteditdt());
 			result.setId(parentId);
 			osMsgDao.addComponent(result);
 			String type="";
@@ -144,7 +144,7 @@ public class SendComponentService {
 				}
 				com.setParentId(parentId);
 				com.setId(Integer.toString(id));
-				com.setLasteditdt(new Date());
+				com.setLasteditdt(model.getLasteditdt());
 				osMsgDao.addComponent(com);
 				id++;
 			}

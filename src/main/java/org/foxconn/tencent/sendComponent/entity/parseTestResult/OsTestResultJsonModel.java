@@ -1,8 +1,18 @@
 package org.foxconn.tencent.sendComponent.entity.parseTestResult;
 
+import java.util.Date;
+
 public class OsTestResultJsonModel {
 	private String ssn;
 	private String json;
+	private Date lasteditdt;
+	
+	public Date getLasteditdt() {
+		return lasteditdt;
+	}
+	public void setLasteditdt(Date lasteditdt) {
+		this.lasteditdt = lasteditdt;
+	}
 	public String getJson() {
 		return json;
 	}
