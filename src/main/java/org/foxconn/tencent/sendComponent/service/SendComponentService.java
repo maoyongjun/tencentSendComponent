@@ -18,6 +18,7 @@ import org.foxconn.tencent.sendComponent.entity.B2BMQMsgRequest;
 import org.foxconn.tencent.sendComponent.entity.B2BMQMsgResponse;
 import org.foxconn.tencent.sendComponent.entity.EfoxApiRequest;
 import org.foxconn.tencent.sendComponent.entity.EfoxApiResponse;
+import org.foxconn.tencent.sendComponent.entity.Config.B2BUrlEntity;
 import org.foxconn.tencent.sendComponent.entity.efoxParno.MMprodmaster;
 import org.foxconn.tencent.sendComponent.entity.efoxResult.EfoxComponent;
 import org.foxconn.tencent.sendComponent.entity.efoxResult.OdmPartComponent;
@@ -48,16 +49,18 @@ import com.sap.conn.jco.JCoException;
 @Service
 public class SendComponentService {
 //	private String url ="https://tssp.tencent.com/open_api/logic_test";
-	private String serverIp="10.67.37.83";
-	private String serverPort="8082";
-	private String mqUrl ="http://"+serverIp+":"+serverPort+"/tencent/message";
-	private String logUrl="http://"+serverIp+":"+serverPort+"/logs";
+//	private String serverIp="10.67.37.83";
+//	private String serverPort="8082";
+//	private String mqUrl ="http://"+serverIp+":"+serverPort+"/tencent/message";
+//	private String logUrl="http://"+serverIp+":"+serverPort+"/logs";
 	public static String SERVER_ACTION="SupplierWriteServerPartInfo";
 	public static String ODM_ACTION="SupplierWriteOdmPartInfo";
 	@Resource
 	OsMsgDao osMsgDao;
 	@Resource
 	EfoxComponentFactorys factorys;
+	@Resource
+	B2BUrlEntity b2BUrlEntity;
 	
 	
 	Logger logger = Logger.getLogger(SendComponentService.class);
@@ -191,7 +194,7 @@ public class SendComponentService {
 		logMsg.setFailure_code("");
 		logMsg.setLog_info("success");
 		logMsg.setParent_api_code("SFCjob_"+action);
-		logMsg.setCall_api_ip(serverIp);
+		logMsg.setCall_api_ip(b2BUrlEntity.getServerIp());
 		String json = JSON.toJSONString(logMsg);
 		logger.info("send to b2b logApi request-->"+json);
 		try {
@@ -201,7 +204,7 @@ public class SendComponentService {
 		}
 		String resultMsg=null;
 		try {
-			resultMsg = sendFormData(logUrl,json);
+			resultMsg = sendFormData(b2BUrlEntity.getLogUrl(),json);
 		} catch (Exception e) {
 			logger.error(e.toString());
 			logger.error("get mesId From B2B Error");
@@ -253,7 +256,7 @@ public class SendComponentService {
 		}
 		String resultMsg=null;
 		try {
-			resultMsg = sendFormData(mqUrl,json);
+			resultMsg = sendFormData(b2BUrlEntity.getMqUrl(),json);
 		} catch (Exception e) {
 			logger.error(e.toString());
 			logger.error("get mesId From B2B Error");
@@ -302,7 +305,7 @@ public class SendComponentService {
 		Map<String,String> map = new HashMap<>();
 		map.put("data", postjson);
 		HttpEntity<String> httpEntity = new HttpEntity(gson.toJson(map), httpHeaders);
-		ResponseEntity responseEntity = restTemplate.exchange(mqUrl, HttpMethod.POST, httpEntity, Object.class); 
+		ResponseEntity responseEntity = restTemplate.exchange(b2BUrlEntity.getMqUrl(), HttpMethod.POST, httpEntity, Object.class); 
 		responseEntity.getBody();
 		return "";
 	}
