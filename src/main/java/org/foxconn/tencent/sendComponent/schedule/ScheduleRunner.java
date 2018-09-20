@@ -23,14 +23,22 @@ public class ScheduleRunner {
 	ScheduledExecutorService taskService = Executors.newScheduledThreadPool(10);;
 	List<Runnable> oneDayRunnables = new ArrayList<Runnable>();
 	List<Runnable> oneHoursRunnables = new ArrayList<Runnable>();
+	List<Runnable> twoHoursRunnables = new ArrayList<Runnable>();
 	List<Runnable> oneWeekRunnables = new ArrayList<Runnable>();
+	List<Runnable> oneFiveMinutesRunnables = new ArrayList<Runnable>();
 	public void run() {
 		addRunnables();
 		for(Runnable runnable : oneDayRunnables){
 			taskService.scheduleAtFixedRate(runnable, 0, 1000, TimeUnit.SECONDS);
 		}
+		for(Runnable runnable : oneFiveMinutesRunnables){
+			taskService.scheduleAtFixedRate(runnable, 0, 60*15, TimeUnit.SECONDS);
+		}
 		for(Runnable runnable : oneHoursRunnables){
 			taskService.scheduleAtFixedRate(runnable, 0, 3600, TimeUnit.SECONDS);
+		}
+		for(Runnable runnable : twoHoursRunnables){
+			taskService.scheduleAtFixedRate(runnable, 0, 2*3600, TimeUnit.SECONDS);
 		}
 		for(Runnable runnable : oneWeekRunnables){
 			taskService.scheduleAtFixedRate(runnable, 0, 3600*24*7, TimeUnit.SECONDS);
@@ -39,16 +47,35 @@ public class ScheduleRunner {
 	}
 	
 	public void addRunnables(){
-		addSendExcelRunnable();
+		addSendComponentRunnable();
 		addupdatePnMapRunnable();
+		addParseTestResult();
 	}
 	
-	
-	public void addSendExcelRunnable(){
+	public void addParseTestResult(){
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				logger.info("send excel task Begin");
+				logger.info( "parse Test Result task Begin");
+				try {
+					sendComponentService.parseTestResult();
+					
+				} catch (Exception e) {
+					logger.error("parse Test Result task Error",e);
+				}
+				logger.info("parse Test Result  task End");
+			}
+		};
+		oneFiveMinutesRunnables.add(runnable);
+		
+	}
+	
+	
+	public void addSendComponentRunnable(){
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				logger.info("send component task Begin");
 				try {
 					String msgId ="";
 					String action ="";
@@ -66,12 +93,12 @@ public class ScheduleRunner {
 					}
 					
 				} catch (Exception e) {
-					logger.error("send excel task Error",e);
+					logger.error("send component task Error",e);
 				}
-				logger.info("send excel task End");
+				logger.info("send component task End");
 			}
 		};
-		oneDayRunnables.add(runnable);
+		twoHoursRunnables.add(runnable);
 	}
 	
 	
