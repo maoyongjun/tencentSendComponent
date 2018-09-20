@@ -47,8 +47,8 @@ public class ScheduleRunner {
 	}
 	
 	public void addRunnables(){
-//		addSendComponentRunnable();
-//		addupdatePnMapRunnable();
+		addSendComponentRunnable();
+		addupdatePnMapRunnable();
 		addParseTestResult();
 	}
 	
