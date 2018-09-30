@@ -38,7 +38,7 @@ public class ScheduleRunner {
 			taskService.scheduleAtFixedRate(runnable, 0, 3600, TimeUnit.SECONDS);
 		}
 		for(Runnable runnable : twoHoursRunnables){
-			taskService.scheduleAtFixedRate(runnable, 0, 2*3600, TimeUnit.SECONDS);
+			taskService.scheduleAtFixedRate(runnable, 2*3600, 2*3600, TimeUnit.SECONDS);
 		}
 		for(Runnable runnable : oneWeekRunnables){
 			taskService.scheduleAtFixedRate(runnable, 0, 3600*24*7, TimeUnit.SECONDS);
