@@ -43,7 +43,7 @@ public class MMprodmasterSAPClient extends SAPBaseClient
         {
         	JCoParameterList  jCoParameterList2 = function.getImportParameterList();
         	jCoParameterList2.setValue("PARTNO", partno);
-        	jCoParameterList2.setValue("PLANT", "GHUS");
+        	jCoParameterList2.setValue("PLANT", "GHUD");
         	jCoParameterList2.setValue("LASTEDITDT", "20170101");
         	logger.info("--calling sap");;
         	function.execute(destination);
@@ -70,6 +70,6 @@ public class MMprodmasterSAPClient extends SAPBaseClient
     public static void main(String[] args) throws JCoException
     {
     	MMprodmasterSAPClient client = new MMprodmasterSAPClient();
-    	client.downMMprodmastercalls("35121J500-245-G");
+    	client.downMMprodmastercalls("1A524MA00-600-G");
     }
 }

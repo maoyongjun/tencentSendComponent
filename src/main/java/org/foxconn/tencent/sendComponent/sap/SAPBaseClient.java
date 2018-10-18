@@ -14,6 +14,8 @@ public class SAPBaseClient {
 		Properties connectProperties = new Properties();
 		connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.134.28.204");
 		connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "04");
+//		connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.134.28.85");
+//		connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "02");
 		connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "801");
 		connectProperties.setProperty(DestinationDataProvider.JCO_USER, "SFC_USER");
 		connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "yhpwd");

@@ -48,11 +48,17 @@
  	</update>
  	
  	<select id="findSkunos" resultType="org.foxconn.tencent.sendComponent.entity.efoxParno.MMprodmaster">
- 		select	DISTINCT B.partno
+	 	
+<!-- 	 	select	DISTINCT A.skuno as partno -->
+<!-- 		from	mfworkorder A,mfworkdetail B   -->
+<!-- 		WHERE	routeid  LIKE 'LXTe%'  -->
+<!-- 				AND A.workorderno = B.workorderno -->
+<!-- 				UNION -->
+		select	DISTINCT b.partno as partno
 		from	mfworkorder A,mfworkdetail B  
 		WHERE	routeid  LIKE 'LXTe%' 
 				AND A.workorderno = B.workorderno
-				AND B.categoryname  IN ('MG67','MG95')
+
  	</select>
  	<insert id="addLog" parameterType="org.foxconn.tencent.sendComponent.entity.log.EfoxLogModel">
  		INSERT INTO efoxSFCTencentSendLog(logDate,apiname,msgId,msgType,data) 
