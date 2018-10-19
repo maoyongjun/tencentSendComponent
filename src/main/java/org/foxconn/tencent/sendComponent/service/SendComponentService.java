@@ -42,7 +42,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
-import com.google.gson.Gson;
 import com.sap.conn.jco.JCoException;
 
 @RestController
@@ -297,19 +296,19 @@ public class SendComponentService {
 		String result = restTemplate.postForObject(url,entity,String.class); 
 		return result;
 	}
-	private String sendFormDataTest(String postjson){
-		RestTemplate restTemplate = new RestTemplate();
-		HttpHeaders httpHeaders = new HttpHeaders(); 
-		httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-		Gson gson = new Gson();
-		Map<String,String> map = new HashMap<>();
-		map.put("data", postjson);
-		HttpEntity<String> httpEntity = new HttpEntity(gson.toJson(map), httpHeaders);
-		ResponseEntity responseEntity = restTemplate.exchange(b2BUrlEntity.getMqUrl(), HttpMethod.POST, httpEntity, Object.class); 
-		responseEntity.getBody();
-		return "";
-	}
-	
+//	private String sendFormDataTest(String postjson){
+//		RestTemplate restTemplate = new RestTemplate();
+//		HttpHeaders httpHeaders = new HttpHeaders(); 
+//		httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+//		Gson gson = new Gson();
+//		Map<String,String> map = new HashMap<>();
+//		map.put("data", postjson);
+//		HttpEntity<String> httpEntity = new HttpEntity(gson.toJson(map), httpHeaders);
+//		ResponseEntity responseEntity = restTemplate.exchange(b2BUrlEntity.getMqUrl(), HttpMethod.POST, httpEntity, Object.class); 
+//		responseEntity.getBody();
+//		return "";
+//	}
+//	
 	private void addLog(String apiname,String msgId,String msgType,String data){
 		EfoxLogModel log = new EfoxLogModel();
 		log.setLogDate(new Date());
